@@ -1,0 +1,162 @@
+<section>
+  <h1>Starwars spaceships</h1>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <table class="table table-light table-hover">
+        <thead>
+          <tr>
+            <th class="sort-th">ID</th>
+            <th class="sort-th">Fogyasztás</th>
+            <th class="sort-th">Csoport</th>
+            <th class="sort-th">Szállítható súly</th>
+            <th class="sort-th">Utasok száma</th>
+            <th class="sort-th">Max sebesség</th>
+            <th class="sort-th">Személyzet száma</th>
+            <th class="sort-th">Hosszúság</th>
+            <th class="sort-th">Típus</th>
+            <th class="sort-th">Költségek</th>
+            <th class="sort-th">Gyártó</th>
+            <th class="sort-th">Kép</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input class="form-control" type="number" name="id" id="id" placeholder="ID" [(ngModel)]="newSpaceship.id" required>
+            </td>
+            <td>
+              <input class="form-control" type="text" name="consumption" id="consumption" placeholder="Fogyasztás" [(ngModel)]="newSpaceship.consumables">
+            </td>
+            <td>
+              <input class="form-control" type="text" name="denomination" id="denomination" placeholder="Csoport" [(ngModel)]="newSpaceship.denomination" required>
+            </td>
+            <td>
+              <input class="form-control" type="number" name="cargo_capacity" id="cargo_capacity" placeholder="Szállítható súly" [(ngModel)]="newSpaceship.cargo_capacity">
+            </td>
+            <td>
+              <input class="form-control" type="number" name="passengers" id="passengers" placeholder="Utasok" [(ngModel)]="newSpaceship.passengers">
+            </td>
+            <td>
+              <input class="form-control" type="number" name="max_atmosphering_speed" id="max_atmosphering_speed" placeholder="Sebesség"
+                [(ngModel)]="newSpaceship.max_atmosphering_speed">
+            </td>
+            <td>
+              <input class="form-control" type="number" name="crew" id="crew" placeholder="Személyzet" [(ngModel)]="newSpaceship.crew">
+            </td>
+            <td>
+              <input class="form-control" type="number" name="lengthiness" id="lengthiness" placeholder="Hosszúság" [(ngModel)]="newSpaceship.lengthiness">
+            </td>
+            <td>
+              <input class="form-control" type="text" name="model" id="model" placeholder="Típus" [(ngModel)]="newSpaceship.model" required>
+            </td>
+            <td>
+              <input class="form-control" type="number" name="cost_in_credits" id="cost_in_credits" placeholder="Költség" [(ngModel)]="newSpaceship.cost_in_credits">
+            </td>
+            <td>
+              <input class="form-control" type="text" name="manufacturer" id="manufacturer" placeholder="Gyártó" [(ngModel)]="newSpaceship.manufacturer">
+            </td>
+            <td>
+              <input class="form-control" type="text" name="image" id="image" placeholder="Kép" [(ngModel)]="newSpaceship.image">
+            </td>
+            <td>
+              <button class="form-control btn btn-primary" (click)="create()">
+                <i class="fas fa-plus"></i>
+                Új termék hozzáadása</button>
+            </td>
+          </tr>
+          <tr *ngFor="let spaceship of datas">
+            <td>{{ spaceship.id }}</td>
+            <td>{{ spaceship.consumables }}</td>
+            <td>{{ spaceship.denomination }}</td>
+            <td>{{ spaceship.cargo_capacity }}</td>
+            <td>{{ spaceship.passengers }}</td>
+            <td>{{ spaceship.max_atmosphering_speed }}</td>
+            <td>{{ spaceship.crew }}</td>
+            <td>{{ spaceship.lengthiness }}</td>
+            <td>{{ spaceship.model }}</td>
+            <td>{{ spaceship.cost_in_credits }}</td>
+            <td>{{ spaceship.manufacturer }}</td>
+            <td>{{ spaceship.image }}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-danger" type="button" (click)="delete(spaceship._id)">
+                  <i class="far fa-trash-alt"></i>
+                  Törlés</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="updateByModal(spaceship._id)">
+                  <i class="fas fa-pencil-alt"></i>
+                  Szerkesztés
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- Modal -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Űrhajó szerkesztése</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+    
+                <label for="mspaceshipid">ID</label>
+                <input class="form-control" type="text" name="mspaceshipid" id="mspaceshipid" [(ngModel)]="spaceship.id" readonly>
+                <label for="mconsumption">Fogyasztás</label>
+                <input class="form-control" type="text" name="mconsumption" id="mconsumption" [(ngModel)]="spaceship.consumables">
+            
+                <label for="mdenomination">Csoport</label>
+                <input class="form-control" type="text" name="mdenomination" id="mdenomination" [(ngModel)]="spaceship.denomination">
+                
+                <label for="mcargo_capacity">Szállítható súly</label>
+                <input class="form-control" type="number" name="mcargo_capacity" id="mcargo_capacity" [(ngModel)]="spaceship.cargo_capacity">
+                
+                <label for="mpassengers">Utasok</label>
+                <input class="form-control" type="number" name="mpassengers" id="mpassengers" [(ngModel)]="spaceship.passengers">
+                
+                <label for="mmax_atmosphering_speed">Maximális sebesség</label>
+                <input class="form-control" type="number" name="mmax_atmosphering_speed" id="mmax_atmosphering_speed"
+                [(ngModel)]="spaceship.max_atmosphering_speed">
+                <label for="mcrew">Személyzet</label>
+                <input class="form-control" type="number" name="mcrew" id="mcrew" [(ngModel)]="spaceship.crew">
+
+                <label for="mlengthiness">Hosszúság</label>
+                <input class="form-control" type="number" name="mlengthiness" id="mlengthiness" [(ngModel)]="spaceship.lengthiness">
+
+                <label for="mmodel">Típus</label>
+                <input class="form-control" type="text" name="mmodel" id="mmodel" [(ngModel)]="spaceship.model">
+
+                <label for="mcost_in_credits">Költségek</label>
+                <input class="form-control" type="number" name="mcost_in_credits" id="mcost_in_credits" [(ngModel)]="spaceship.cost_in_credits">
+
+                <label for="mmanufacturer">Gyártó</label>
+                <input class="form-control" type="text" name="mmanufacturer" id="mmanufacturer" [(ngModel)]="spaceship.manufacturer">
+
+                <label for="mimage">Kép</label>
+                <input class="form-control" type="text" name="mimage" id="mimage" [(ngModel)]="spaceship.image">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+                <button type="button" class="btn btn-primary" (click)="update()">Mentés</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
